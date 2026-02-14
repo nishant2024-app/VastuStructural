@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Play, Zap, Star, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Calculator, ShoppingCart, Zap, Star, CheckCircle2, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import FreeSampleButton from "@/components/freesample/FreeSampleButton";
 
@@ -16,6 +16,12 @@ const features = [
     "48-Hour Delivery"
 ];
 
+const pricingTiers = [
+    { name: "Basic", price: "₹2,999", desc: "2D Floor Plan + Basic Vastu" },
+    { name: "Standard", price: "₹9,999", desc: "3D Elevation + Full Structural" },
+    { name: "Premium", price: "₹24,999", desc: "Complete Civil + Site Visit" },
+];
+
 export default function Hero() {
     return (
         <section className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
@@ -26,25 +32,31 @@ export default function Hero() {
             <div
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
                 style={{
-                    backgroundImage: `linear-gradient(#f5a623 1px, transparent 1px), linear-gradient(90deg, #f5a623 1px, transparent 1px)`,
+                    backgroundImage: `linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(90deg, var(--primary) 1px, transparent 1px)`,
                     backgroundSize: "80px 80px"
                 }}
             />
 
             {/* Glow Orbs */}
-            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[150px] pointer-events-none animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-secondary/8 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-accent/8 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] pointer-events-none animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Left Content */}
                     <div className="max-w-2xl">
                         {/* Badge */}
-                        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8">
+                        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
                             <Zap size={14} className="text-primary" />
                             <span className="text-sm font-bold text-primary">AI-Powered Vastu Analysis</span>
                             <span className="px-2 py-0.5 bg-primary text-background text-[10px] font-black rounded-full">NEW</span>
+                        </div>
+
+                        {/* 48-Hour Delivery Badge */}
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success/10 border border-success/20 mb-8 ml-3">
+                            <Clock size={14} className="text-success" />
+                            <span className="text-sm font-bold text-success">48-Hour Delivery Guarantee</span>
                         </div>
 
                         {/* Main Heading */}
@@ -57,13 +69,13 @@ export default function Hero() {
                         </h1>
 
                         {/* Subtext */}
-                        <p className="text-base md:text-lg text-foreground/50 max-w-lg mb-8 leading-relaxed">
+                        <p className="text-base md:text-lg text-foreground/50 max-w-lg mb-6 leading-relaxed">
                             Blend ancient Vastu wisdom with modern architectural excellence.
                             Get AI-powered floor plans that harmonize energy flow.
                         </p>
 
                         {/* Feature Pills */}
-                        <div className="flex flex-wrap gap-3 mb-8">
+                        <div className="flex flex-wrap gap-3 mb-6">
                             {features.map((feature, idx) => (
                                 <div key={idx} className="flex items-center gap-2 px-4 py-2 bg-card rounded-full border border-border">
                                     <CheckCircle2 size={14} className="text-success" />
@@ -73,19 +85,27 @@ export default function Hero() {
                         </div>
 
                         {/* CTAs */}
-                        <div className="flex flex-wrap gap-4 mb-10">
+                        <div className="flex flex-wrap gap-3 mb-8">
                             <FreeSampleButton size="lg" variant="primary" />
                             <Link
-                                href="/services"
-                                className="group flex items-center gap-3 px-6 py-4 bg-card border border-border rounded-full font-bold hover:border-primary/50 transition-all"
+                                href="/calculator"
+                                className="group flex items-center gap-2 px-5 py-3 bg-accent/10 border border-accent/30 rounded-full font-bold text-accent hover:bg-accent hover:text-background transition-all"
                             >
-                                View Services
-                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                <Calculator size={18} />
+                                Calculate Cost
+                            </Link>
+                            <Link
+                                href="/shop"
+                                className="group flex items-center gap-2 px-5 py-3 bg-card border border-border rounded-full font-bold hover:border-primary/50 transition-all"
+                            >
+                                <ShoppingCart size={18} className="text-primary" />
+                                Buy Plan
+                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>
 
                         {/* Stats */}
-                        <div className="flex flex-wrap gap-8 pt-8 border-t border-border">
+                        <div className="flex flex-wrap gap-8 pt-6 border-t border-border">
                             {stats.map((stat, idx) => (
                                 <div key={idx} className="text-center">
                                     <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -99,81 +119,76 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Right Visual */}
-                    <div className="hidden lg:block relative group">
-                        <div className="relative w-full aspect-square max-w-[600px] mx-auto">
-                            {/* Architectural Line Art Background */}
-                            <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 500 500">
-                                <circle cx="250" cy="250" r="240" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="10 10" className="text-primary" />
-                                <circle cx="250" cy="250" r="180" fill="none" stroke="currentColor" strokeWidth="1" className="text-secondary" />
-                                <path d="M50,250 L450,250 M250,50 L250,450 M100,100 L400,400 M100,400 L400,100" stroke="currentColor" strokeWidth="0.5" className="text-accent" />
-                            </svg>
+                    {/* Right Visual - Pricing Cards */}
+                    <div className="hidden lg:block relative">
+                        <div className="relative w-full max-w-[550px] mx-auto">
+                            {/* Background Glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 rounded-[3rem] blur-3xl" />
 
-                            {/* Rotating Vastu Compass */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="relative w-[450px] h-[450px] animate-[spin_60s_linear_infinite]">
-                                    {/* Directions */}
-                                    {["N", "NE", "E", "SE", "S", "SW", "W", "NW"].map((dir, i) => (
-                                        <div
-                                            key={dir}
-                                            className="absolute top-0 left-1/2 -translate-x-1/2 h-full py-4 flex flex-col justify-between items-center"
-                                            style={{ transformOrigin: "center", transform: `translateX(-50%) rotate(${i * 45}deg)` }}
-                                        >
-                                            <span className="text-[10px] font-black tracking-widest text-primary/40 group-hover:text-primary transition-colors">{dir}</span>
-                                            <div className="w-px h-8 bg-gradient-to-b from-primary/20 to-transparent" />
+                            {/* Pricing Cards */}
+                            <div className="relative space-y-4">
+                                {pricingTiers.map((tier, idx) => (
+                                    <div
+                                        key={tier.name}
+                                        className={`
+                                            group p-5 rounded-2xl border backdrop-blur-xl transition-all duration-500 cursor-pointer
+                                            ${idx === 1
+                                                ? 'bg-primary/10 border-primary/40 scale-105 shadow-[0_0_40px_-10px] shadow-primary/30'
+                                                : 'bg-card/60 border-border hover:border-primary/30 hover:bg-card/80'
+                                            }
+                                        `}
+                                        style={{ animationDelay: `${idx * 150}ms` }}
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-4">
+                                                <div className={`
+                                                    w-12 h-12 rounded-xl flex items-center justify-center
+                                                    ${idx === 1 ? 'bg-primary text-background' : 'bg-primary/10 text-primary'}
+                                                `}>
+                                                    {idx === 0 && <Sparkles size={20} />}
+                                                    {idx === 1 && <Star size={20} fill="currentColor" />}
+                                                    {idx === 2 && <Zap size={20} />}
+                                                </div>
+                                                <div>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="font-black text-lg text-foreground">{tier.name}</span>
+                                                        {idx === 1 && (
+                                                            <span className="px-2 py-0.5 bg-primary text-background text-[10px] font-black rounded-full">
+                                                                POPULAR
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    <span className="text-sm text-foreground/50">{tier.desc}</span>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-2xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                                                    {tier.price}
+                                                </div>
+                                                <div className="text-xs text-foreground/40">one-time</div>
+                                            </div>
                                         </div>
-                                    ))}
-
-                                    {/* Outer Ring */}
-                                    <div className="absolute inset-0 rounded-full border border-primary/10 group-hover:border-primary/30 transition-colors" />
-                                </div>
+                                    </div>
+                                ))}
                             </div>
 
-                            {/* Center Visual Plate */}
-                            <div className="absolute inset-0 flex items-center justify-center p-20">
-                                <div className="relative w-full h-full bg-card/40 backdrop-blur-3xl rounded-[3rem] border border-white/5 shadow-2xl flex items-center justify-center overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
-                                    <div className="relative z-10 flex flex-col items-center gap-6">
-                                        <div className="w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-3xl flex items-center justify-center shadow-2xl shadow-primary/20 scale-110 hover:rotate-12 transition-transform cursor-pointer">
-                                            <Play size={32} className="text-background ml-1.5" fill="currentColor" />
-                                        </div>
-                                        <div className="text-center">
-                                            <div className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-1">Architecture v2.0</div>
-                                            <div className="text-xl font-bold text-foreground">AI Energy Core</div>
-                                        </div>
-                                    </div>
-
-                                    {/* Pulse Ring */}
-                                    <div className="absolute w-[300%] h-[300%] bg-[radial-gradient(circle,rgba(var(--primary-rgb),0.1)_0%,transparent_70%)] animate-pulse" />
-                                </div>
+                            {/* Shop CTA */}
+                            <div className="mt-6 text-center">
+                                <Link
+                                    href="/shop"
+                                    className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-background rounded-full font-black text-lg shadow-[0_4px_30px_-5px] shadow-primary/40 hover:shadow-primary/60 hover:scale-105 transition-all"
+                                >
+                                    <ShoppingCart size={20} />
+                                    View All Plans
+                                    <ArrowRight size={18} />
+                                </Link>
                             </div>
 
-                            {/* AI Floating Nodes */}
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-                            <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-
-                            {/* Floating Metadata Cards */}
-                            <div className="absolute top-12 left-0 px-5 py-4 bg-card/80 backdrop-blur-xl rounded-2xl border border-border shadow-2xl animate-float">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-success/10 flex items-center justify-center">
-                                        <CheckCircle2 size={18} className="text-success" />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs font-bold text-foreground/50">Vastu Score</div>
-                                        <div className="text-lg font-black text-foreground">98/100</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="absolute bottom-12 right-0 px-5 py-4 bg-card/80 backdrop-blur-xl rounded-2xl border border-border shadow-2xl animate-float" style={{ animationDelay: "2s" }}>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                                        <Star size={18} className="text-primary" fill="currentColor" />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs font-bold text-foreground/50">Client Rating</div>
-                                        <div className="text-lg font-black text-foreground">4.9★</div>
-                                    </div>
+                            {/* Floating Badge */}
+                            <div className="absolute -top-4 -right-4 px-4 py-2 bg-success/10 border border-success/30 rounded-full backdrop-blur-xl animate-float">
+                                <div className="flex items-center gap-2">
+                                    <Clock size={14} className="text-success" />
+                                    <span className="text-xs font-bold text-success">48hr Delivery</span>
                                 </div>
                             </div>
                         </div>
@@ -183,3 +198,4 @@ export default function Hero() {
         </section>
     );
 }
+

@@ -4,23 +4,31 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X, Hexagon, Sparkles } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Gallery", href: "/experience" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-];
+import { useAuth } from "@/hooks/useAuth";
+import NotificationCenter from "./NotificationCenter";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const { role: userType, isLoading } = useAuth();
+    const { t } = useLanguage();
+
+    const navLinks = [
+        { name: t("nav_home"), href: "/" },
+        { name: t("nav_services"), href: "/services" },
+        { name: t("nav_calculator"), href: "/calculator" },
+        { name: t("nav_shop"), href: "/shop" },
+        { name: t("nav_about") || "About", href: "/about" },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -65,10 +73,42 @@ export default function Navbar() {
                             <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-6 transition-all" />
                         </Link>
                     ))}
+                    {!userType ? (
+                        <>
+                            <Link
+                                href="/client-portal/login"
+                                className="relative px-5 py-2.5 text-sm font-bold text-foreground/70 hover:text-foreground transition-colors group"
+                            >
+                                {t("nav_client_login")}
+                                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-6 transition-all" />
+                            </Link>
+                            <Link
+                                href="/contractor-portal/login"
+                                className="relative px-5 py-2.5 text-sm font-bold text-foreground/70 hover:text-foreground transition-colors group"
+                            >
+                                {t("nav_contractor")}
+                                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-6 transition-all" />
+                            </Link>
+                        </>
+                    ) : (
+                        userType !== "admin" && (
+                            <Link
+                                href={userType === "contractor" ? "/contractor-portal" : "/client-portal"}
+                                className="relative px-5 py-2.5 text-sm font-bold text-primary group"
+                            >
+                                {t("nav_my_dashboard")}
+                                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-6 transition-all" />
+                            </Link>
+                        )
+                    )}
                 </div>
 
-                {/* CTA */}
+                {/* Desktop Actions */}
                 <div className="hidden lg:flex items-center gap-4">
+                    {/* Language Switcher */}
+                    <LanguageSwitcher variant="desktop" />
+
+                    {userType && <NotificationCenter />}
                     <Link
                         href="/services"
                         className="group relative px-6 py-3 overflow-hidden rounded-full font-bold text-sm"
@@ -77,18 +117,22 @@ export default function Navbar() {
                         <span className="absolute inset-[2px] bg-background rounded-full" />
                         <span className="relative flex items-center gap-2 text-foreground">
                             <Sparkles size={16} className="text-primary" />
-                            Get Started
+                            {t("btn_get_started")}
                         </span>
                     </Link>
                 </div>
 
-                {/* Mobile Toggle */}
-                <button
-                    className="lg:hidden p-2.5 rounded-xl bg-card border border-border text-foreground"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={22} /> : <Menu size={22} />}
-                </button>
+                {/* Mobile Actions */}
+                <div className="flex items-center gap-2 lg:hidden">
+                    <LanguageSwitcher variant="mobile" />
+                    {userType && <NotificationCenter />}
+                    <button
+                        className="p-2.5 rounded-xl bg-card border border-border text-foreground"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {isOpen ? <X size={22} /> : <Menu size={22} />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu */}
@@ -110,17 +154,45 @@ export default function Navbar() {
                     </button>
                 </div>
 
-                <div className="flex flex-col gap-2 p-6 flex-1">
+                <div className="flex flex-col gap-2 p-6 flex-1 overflow-y-auto">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="py-4 px-6 text-2xl font-bold text-foreground/80 hover:text-foreground hover:bg-card rounded-2xl transition-colors"
+                            className="py-3 px-6 text-xl font-bold text-foreground/80 hover:text-foreground hover:bg-card rounded-2xl transition-colors"
                             onClick={() => setIsOpen(false)}
                         >
                             {link.name}
                         </Link>
                     ))}
+                    {!userType ? (
+                        <>
+                            <Link
+                                href="/client-portal/login"
+                                className="py-3 px-6 text-xl font-bold text-foreground/80 hover:text-foreground hover:bg-card rounded-2xl transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {t("nav_client_login")}
+                            </Link>
+                            <Link
+                                href="/contractor-portal/login"
+                                className="py-3 px-6 text-xl font-bold text-foreground/80 hover:text-foreground hover:bg-card rounded-2xl transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {t("nav_contractor")}
+                            </Link>
+                        </>
+                    ) : (
+                        userType !== "admin" && (
+                            <Link
+                                href={userType === "contractor" ? "/contractor-portal" : "/client-portal"}
+                                className="py-3 px-6 text-xl font-bold text-primary hover:bg-primary/5 rounded-2xl transition-colors"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {t("nav_my_dashboard")}
+                            </Link>
+                        )
+                    )}
                 </div>
 
                 <div className="p-6 border-t border-border">

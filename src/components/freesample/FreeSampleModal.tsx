@@ -17,6 +17,14 @@ interface FreeSampleModalProps {
 const directions = ["North", "South", "East", "West", "NE", "NW", "SE", "SW"];
 const roomOptions = ["2 BHK", "3 BHK", "4 BHK", "5+ BHK", "Duplex", "Villa"];
 
+interface PuterAIResponse {
+    src?: string;
+    url?: string;
+    message?: {
+        content: string;
+    };
+}
+
 export default function FreeSampleModal({ isOpen, onClose }: FreeSampleModalProps) {
     const [step, setStep] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
@@ -139,20 +147,16 @@ export default function FreeSampleModal({ isOpen, onClose }: FreeSampleModalProp
 
             setStep(3);
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("Detailed Generation error:", err);
+            const error = err as Error | { error?: string; message?: string };
 
             // Format error message for human and lead notes
-            // Puter errors often come as an object {success: false, error: "..."}
             let errorMsg = "Unknown AI Error";
-            if (typeof err === 'string') {
-                errorMsg = err;
-            } else if (err?.error && typeof err.error === 'string') {
-                errorMsg = err.error;
-            } else if (err?.message) {
-                errorMsg = err.message;
-            } else {
-                errorMsg = JSON.stringify(err);
+            if (typeof error === 'string') {
+                errorMsg = error;
+            } else if (typeof error === 'object' && error !== null) {
+                errorMsg = (error as any).error || error.message || JSON.stringify(error);
             }
 
             // Save lead for manual follow-up with detailed notes
@@ -205,7 +209,7 @@ Your Vastu floor plan request has been received:
             const image = await window.puter.ai.txt2img({
                 prompt: imagePrompt,
                 model: "gpt-image-1.5" // Use Puter's free/low-cost model
-            });
+            }) as PuterAIResponse;
 
             console.log("Puter raw response:", image);
 
@@ -213,8 +217,8 @@ Your Vastu floor plan request has been received:
                 setGeneratedImage(image.src);
             } else if (typeof image === 'string') {
                 setGeneratedImage(image);
-            } else if (image && typeof image === 'object' && (image as any).url) {
-                setGeneratedImage((image as any).url);
+            } else if (image && typeof image === 'object' && image.url) {
+                setGeneratedImage(image.url);
             } else {
                 console.error("Unhandlable image response:", image);
                 throw new Error("Image generation failed: Response format not recognized");

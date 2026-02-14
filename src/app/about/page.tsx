@@ -18,9 +18,9 @@ const values = [
 ];
 
 const team = [
-    { name: "Ar. Rahul Sharma", role: "Principal Architect", bio: "Ex-L&T, 12 years of luxury residential experience. Specializes in Vastu-modern fusion designs.", initials: "RS", accent: "from-primary to-secondary" },
-    { name: "Smt. Kamala Devi", role: "Vastu Consultant", bio: "30+ years studying Vedic architecture. Recognized by IIST for research contributions.", initials: "KD", accent: "from-secondary to-accent" },
-    { name: "Er. Vikram Singh", role: "Structural Engineer", bio: "IIT Delhi alumnus. Ensuring your home stands strong for generations.", initials: "VS", accent: "from-accent to-primary" },
+    { name: "P M & Associates", role: "Principal Architect & Founder", bio: "Leading structural engineering firm from Mangrulpir. Specializes in Vastu-compliant residential and commercial designs.", initials: "PM", accent: "from-primary to-secondary" },
+    { name: "Vastu Expert Team", role: "Traditional Knowledge", bio: "30+ years collective experience in Vedic architecture. Certified Vastu consultants ensuring positive energy flow.", initials: "VE", accent: "from-secondary to-accent" },
+    { name: "Structural Engineers", role: "Technical Excellence", bio: "Qualified civil engineers ensuring your home stands strong for generations. IS code compliant designs.", initials: "SE", accent: "from-accent to-primary" },
 ];
 
 export default function AboutPage() {
@@ -44,16 +44,17 @@ export default function AboutPage() {
                             </div>
 
                             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter leading-[0.95]">
-                                <span className="text-foreground block">Ancient Science.</span>
+                                <span className="text-foreground block">Engineering the Future</span>
                                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent block">
-                                    Modern Vision.
+                                    with Ancient Wisdom
                                 </span>
                             </h1>
 
                             <p className="text-lg text-foreground/50 leading-relaxed max-w-lg">
-                                VastuStructural was founded to bring the profound wisdom of Vastu Shastra
-                                to modern Indian home-buyers. We believe a home is a living entity
-                                that should vibrate with positive energy and stand on unshakeable foundations.
+                                P M and Associates was founded in Mangrulpir with a mission to bring
+                                professional structural engineering and Vastu science to every Indian family.
+                                We combine AI-powered analysis with traditional wisdom to deliver homes
+                                that are both structurally sound and energetically harmonious.
                             </p>
 
                             <div className="flex flex-wrap gap-4">
@@ -65,10 +66,10 @@ export default function AboutPage() {
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </Link>
                                 <Link
-                                    href="/experience"
+                                    href="/reviews"
                                     className="inline-flex items-center gap-3 px-8 py-4 bg-card border border-border text-foreground font-bold rounded-full hover:border-primary/50 transition-colors"
                                 >
-                                    View Our Work
+                                    See Reviews
                                 </Link>
                             </div>
                         </div>

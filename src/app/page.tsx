@@ -3,6 +3,7 @@ import ServicesShowcase from "@/components/home/ServicesShowcase";
 import FreeSampleSection from "@/components/home/FreeSampleSection";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import Testimonials from "@/components/home/Testimonials";
+import ReviewsCarousel from "@/components/home/ReviewsCarousel";
 import CTABanner from "@/components/home/CTABanner";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <FreeSampleSection />
       <WhyChooseUs />
       <Testimonials />
+      <ReviewsCarousel />
       <CTABanner />
     </div>
   );

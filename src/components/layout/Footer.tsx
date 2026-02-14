@@ -20,7 +20,7 @@ export default function Footer() {
                             </div>
                         </Link>
                         <p className="text-foreground/50 text-sm leading-relaxed">
-                            Modernizing Indian architecture through Vastu Science. Homes that inspire.
+                            P M and Associates: Engineering the Future with Ancient Wisdom. Trusted by 500+ families across Maharashtra.
                         </p>
                         <div className="flex gap-3">
                             {[Instagram, Twitter, Linkedin].map((Icon, idx) => (
@@ -56,10 +56,15 @@ export default function Footer() {
                         <ul className="space-y-3 text-sm">
                             {[
                                 { name: "About Us", href: "/about" },
-                                { name: "Gallery", href: "/experience" },
-                                { name: "Contact", href: "/contact" },
+                                { name: "Reviews", href: "/reviews" },
+                                { name: "Client Login", href: "/client-portal/login" },
+                                { name: "Contractor Login", href: "/contractor-portal/login" },
+                                { name: "Become a Partner", href: "/partners" },
                                 { name: "Privacy Policy", href: "/privacy" },
+                                { name: "Terms of Service", href: "/terms" },
                             ].map((item, idx) => (
+
+
                                 <li key={idx}>
                                     <Link href={item.href} className="text-foreground/50 hover:text-primary transition-colors flex items-center gap-2">
                                         <ArrowRight size={12} />
@@ -78,19 +83,23 @@ export default function Footer() {
                                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                                     <Phone size={16} className="text-primary" />
                                 </div>
-                                <span>+91 98765 43210</span>
+                                <a href="tel:+919067969756" className="hover:text-primary transition-colors">
+                                    +91 9067969756
+                                </a>
                             </li>
                             <li className="flex items-center gap-3 text-foreground/50">
                                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                                     <Mail size={16} className="text-primary" />
                                 </div>
-                                <span>hello@vastustructural.com</span>
+                                <a href="mailto:contact@vastustructural.com" className="hover:text-primary transition-colors">
+                                    contact@vastustructural.com
+                                </a>
                             </li>
                             <li className="flex items-start gap-3 text-foreground/50">
                                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                                     <MapPin size={16} className="text-primary" />
                                 </div>
-                                <span>123, Vastu Enclave, New Delhi 110001</span>
+                                <span>Mangrulpir, Washim District, Maharashtra 444403</span>
                             </li>
                         </ul>
                     </div>
@@ -100,8 +109,9 @@ export default function Footer() {
                 <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/40">
                     <p>© {new Date().getFullYear()} VastuStructural. All rights reserved.</p>
                     <div className="flex items-center gap-6">
-                        <Link href="/admin/login" className="hover:text-primary transition-colors">Admin Login</Link>
-                        <p>Made with ❤️ for Indian Families</p>
+                        <Link href="/terms" className="hover:text-primary transition-colors">Terms</Link>
+                        <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
+                        <Link href="/admin/login" className="hover:text-primary transition-colors">Admin</Link>
                     </div>
                 </div>
             </div>
