@@ -1,7 +1,7 @@
 "use client";
 
 import {
-    Settings, User, Lock, Bell, Global,
+    Settings, User, Lock, Bell, Globe,
     Shield, Palette, Database, Save, ArrowRight
 } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
